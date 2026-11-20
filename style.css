@@ -1,0 +1,168 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --gold: #eab308;
+    --gold-hover: #ca8a04;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --success: #22c55e;
+    --error: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.page-heading {
+    text-align: center;
+}
+
+.page-heading h1 {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+.page-heading p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+.game-container {
+    background-color: var(--card-bg);
+    max-width: 600px;
+    width: 100%;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 15px;
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 1.4rem;
+}
+
+.score-board {
+    background: #0f172a;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.story-box {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--gold);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.hint-box {
+    font-size: 0.9rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    min-height: 20px;
+    font-style: italic;
+}
+
+.inputs-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    font-size: 1rem;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-hint {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.btn-hint:hover {
+    background: rgba(234, 179, 8, 0.1);
+}
+
+.btn-submit {
+    background: var(--gold);
+    color: #0f172a;
+}
+
+.btn-submit:hover {
+    background: var(--gold-hover);
+}
+
+.btn-next {
+    width: 100%;
+    margin-top: 12px;
+    background: #22c55e;
+    color: #0f172a;
+    display: none;
+}
+
+.btn-next:hover {
+    background: #16a34a;
+}
+
+.feedback {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    display: none;
+}
