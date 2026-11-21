@@ -25,6 +25,15 @@
             <div class="score-board">Pontos: <span id="score">0</span></div>
         </header>
 
+        <div class="difficulty-bar" aria-label="Nível de dificuldade">
+            <span>Dificuldade:</span>
+            <div class="difficulty-buttons">
+                <button type="button" class="diff-btn active" data-difficulty="facil">Fácil</button>
+                <button type="button" class="diff-btn" data-difficulty="medio">Médio</button>
+                <button type="button" class="diff-btn" data-difficulty="dificil">Difícil</button>
+            </div>
+        </div>
+
         <div class="story-box" id="story-text">
             Carregando passagem...
         </div>
@@ -34,26 +43,36 @@
         <div class="inputs-grid">
             <select id="book-select">
                 <option value="">Selecione o Livro...</option>
-                <option value="Gênesis">Gênesis</option>
-                <option value="Êxodo">Êxodo</option>
-                <option value="1 Samuel">1 Samuel</option>
-                <option value="Salmos">Salmos</option>
-                <option value="Daniel">Daniel</option>
-                <option value="Mateus">Mateus</option>
-                <option value="João">João</option>
-                <option value="Atos">Atos</option>
             </select>
-            <input type="number" id="chapter-input" placeholder="Cap." min="1">
+            <select id="chapter-select" disabled>
+                <option value="">Cap.</option>
+            </select>
             <input type="number" id="verse-input" placeholder="Vers." min="1">
         </div>
 
         <div class="actions">
-            <button class="btn-hint" onclick="showHint()">💡 Dica (-15 pts)</button>
-            <button class="btn-submit" onclick="checkAnswer()">Responder</button>
+            <button type="button" class="btn-hint" onclick="showHint()">💡 Dica (-15 pts)</button>
+            <button type="button" class="btn-submit" onclick="checkAnswer()">Responder</button>
         </div>
 
         <div class="feedback" id="feedback"></div>
-        <button class="btn-next" id="next-button" onclick="nextQuestion()">Próxima história</button>
+        <button type="button" class="btn-chapter" id="read-chapter-button" onclick="openChapterModal()">📖 Ler capítulo
+            completo</button>
+        <button type="button" class="btn-next" id="next-button" onclick="nextQuestion()">Próxima história</button>
+    </div>
+
+    <!-- Modal de Leitura do Capítulo Completo -->
+    <div id="chapter-modal" class="chapter-modal" role="dialog" aria-modal="true" aria-labelledby="chapter-modal-title">
+        <div class="chapter-modal-box">
+            <div class="chapter-modal-header">
+                <h2 id="chapter-modal-title">Capítulo</h2>
+                <button type="button" class="chapter-close-btn" onclick="closeChapterModal()"
+                    aria-label="Fechar">✕</button>
+            </div>
+            <div id="chapter-modal-body" class="chapter-modal-body">
+                Carregando capítulo...
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
