@@ -8,7 +8,9 @@ Jogo bíblico de perguntas e respostas: leia uma descrição, descubra o livro, 
 
 ## ✨ Sobre o projeto
 
-O jogo apresenta histórias e passagens bíblicas em ordem aleatória. O jogador escolhe a referência que acredita ser correta e recebe pontos conforme a resposta e o nível de dificuldade. Depois de responder, também pode consultar o capítulo completo.
+O jogo apresenta histórias e passagens bíblicas em ordem aleatória. O jogador escolhe a referência que acredita ser correta e recebe pontos conforme a resposta e o nível de dificuldade.
+
+Na primeira visita, um tutorial em várias etapas explica a mecânica do jogo. Depois, ele pode ser aberto novamente a qualquer momento pelo botão **❓ Como jogar**. A partida também permite consultar o capítulo completo da passagem em uma janela de leitura.
 
 O projeto usa somente HTML, CSS e JavaScript — não requer instalação de pacotes nem processo de compilação.
 
@@ -16,9 +18,9 @@ O projeto usa somente HTML, CSS e JavaScript — não requer instalação de pac
 
 | Arquivo | Responsabilidade |
 | --- | --- |
-| [`index.html`](./index.html) | Estrutura da página, controles do jogo, seletor de dificuldade e janela de leitura. Também define o título da aba e o ícone. |
-| [`style.css`](./style.css) | Aparência, cores, disposição dos elementos, estados dos botões e estilos do modal de leitura. |
-| [`script.js`](./script.js) | Banco de passagens, seleção aleatória, pontuação, validação das respostas e consulta às APIs bíblicas. |
+| [`index.html`](./index.html) | Estrutura da página, controles do jogo, seletor de dificuldade, tutorial e janela de leitura do capítulo. Também define o título da aba e o ícone. |
+| [`style.css`](./style.css) | Aparência, cores, disposição dos elementos, estados dos botões e estilos dos modais de tutorial e leitura. |
+| [`script.js`](./script.js) | Banco de passagens, seleção aleatória, tutorial, pontuação, validação das respostas e consulta às APIs bíblicas. |
 
 ## 🚀 Como executar
 
@@ -31,21 +33,57 @@ O projeto usa somente HTML, CSS e JavaScript — não requer instalação de pac
 
 3. Acesse [`http://localhost:8000`](http://localhost:8000) no navegador.
 
-O jogo não precisa de servidor para as perguntas e respostas, mas servir a página por HTTP costuma ser mais confiável para a consulta do capítulo completo. Essa função depende de conexão com a internet e da disponibilidade das APIs externas; restrições de CORS ou indisponibilidade dos serviços podem impedir o carregamento.
+O jogo não precisa de servidor para as perguntas e respostas, mas servir a página por HTTP costuma ser mais confiável para consultar o capítulo completo. Essa função depende de conexão com a internet e pode usar duas APIs bíblicas.
 
-## 🎮 Como jogar
+## 🎮 Tutorial de como jogar
 
-Ao abrir o jogo pela primeira vez, um tutorial completo é exibido em várias etapas: objetivo, níveis de dificuldade, leitura da história, uso da dica, preenchimento da referência, pontuação e continuação do jogo. O tutorial pode ser aberto novamente a qualquer momento pelo botão **❓ Como jogar** no cabeçalho.
+Ao abrir o jogo pela primeira vez, o **tutorial completo** é exibido em 7 etapas. Ele pode ser fechado ou retomado a qualquer momento pelo botão **Como jogar**, localizado no cabeçalho.
 
-1. Escolha **Fácil**, **Médio** ou **Difícil**.
-2. Leia a descrição da passagem.
-3. Se quiser, peça uma dica. A dica custa 15 pontos e só pode ser usada uma vez por pergunta.
-4. Selecione o livro e o capítulo, informe o versículo e clique em **Responder**.
-5. Leia o resultado ou consulte o capítulo completo. Clique em **Próxima história** para continuar.
+### 1. Conheça o objetivo
 
-Após responder, os campos e a dica ficam desativados até a próxima pergunta, evitando alterações ou pontuação repetida na mesma rodada.
+Leia o resumo de uma história ou passagem da Bíblia e descubra:
 
-### Pontuação
+- o livro;
+- o capítulo;
+- o versículo.
+
+Exemplo de resposta: **Gênesis 1:2**.
+
+### 2. Escolha a dificuldade
+
+Antes de começar, selecione **Fácil**, **Médio** ou **Difícil**:
+
+- **Fácil:** histórias conhecidas;
+- **Médio:** parábolas e profetas;
+- **Difícil:** referências específicas, leis e genealogias.
+
+O nível escolhido também altera a quantidade de pontos ganhos.
+
+### 3. Leia a história
+
+Leia com atenção o texto apresentado na caixa dourada. Observe nomes de pessoas, lugares, acontecimentos e detalhes que possam indicar a resposta correta.
+
+### 4. Use uma dica, se precisar
+
+Clique em **💡 Dica (-15 pts)** para revelar uma pista sobre o trecho.
+
+- O desconto é de 15 pontos;
+- a dica só pode ser usada uma vez por pergunta;
+- o total nunca fica abaixo de zero;
+- depois de responder, ela fica desativada até a próxima história.
+
+### 5. Preencha a referência
+
+1. Selecione o **livro**;
+2. escolha o **capítulo**;
+3. digite o número do **versículo**;
+4. clique em **Responder**.
+
+Os capítulos disponíveis são definidos automaticamente pelo livro escolhido. Por exemplo, Gênesis oferece opções de 1 até 50.
+
+### 6. Confira o resultado
+
+O jogo mostra a resposta correta e a pontuação recebida:
 
 | Resultado | Pontos-base |
 | --- | ---: |
@@ -54,7 +92,21 @@ Após responder, os campos e a dica ficam desativados até a próxima pergunta, 
 | Apenas o livro correto | 50 |
 | Resposta incorreta | 0 |
 
-Os pontos-base são multiplicados pela dificuldade: **Fácil ×1**, **Médio ×1,5** e **Difícil ×2**. Usar uma dica desconta 15 pontos, sem deixar o total abaixo de zero.
+Os pontos-base são multiplicados pela dificuldade:
+
+- **Fácil:** ×1;
+- **Médio:** ×1,5;
+- **Difícil:** ×2.
+
+Exemplo: uma resposta exata no modo Difícil vale 500 pontos-base multiplicados pela dificuldade, ou seja, 500 pontos.
+
+Após responder, os campos de livro, capítulo e versículo e os dois botões de ação são desativados para evitar alterações ou pontuação repetida na mesma pergunta.
+
+### 7. Continue aprendendo
+
+Use **📖 Ler capítulo completo** para consultar o contexto da passagem em uma janela modal. Feche essa janela com o botão **✕**, clicando fora dela ou pressionando **Esc**.
+
+Quando terminar, clique em **Próxima história** para avançar. Os controles são reativados automaticamente.
 
 ## 📚 Banco de passagens
 
@@ -75,17 +127,18 @@ Há **30 passagens**, distribuídas igualmente: 10 por dificuldade. Para acresce
 
 ## ⚙️ Lógica principal
 
-- **Embaralhamento:** `preparePassages()` separa as perguntas do modo selecionado e embaralha sua ordem. A primeira passagem da sessão fica registrada no `localStorage` por dificuldade para evitar começar pela mesma pergunta na próxima visita.
+- **Embaralhamento:** `preparePassages()` separa as perguntas do modo selecionado e embaralha sua ordem. A primeira passagem da sessão é registrada no `localStorage` por dificuldade para evitar repetições consecutivas.
 - **Carregamento da pergunta:** `loadQuestion()` mostra a descrição, limpa as respostas anteriores e reativa os controles.
+- **Tutorial:** `tutorialSteps` contém as 7 etapas exibidas pelos modais de orientação. `openTutorial()` inicia a apresentação e `closeTutorial()` registra que o jogador já viu o tutorial.
 - **Dica:** `showHint()` exibe a dica, aplica o desconto e impede que ela seja usada novamente naquela pergunta.
 - **Resposta:** `checkAnswer()` compara livro, capítulo e versículo, calcula os pontos e mostra o feedback.
 - **Próxima pergunta:** `nextQuestion()` avança dentro da lista embaralhada do modo atual.
-- **Leitura do capítulo:** `openChapterModal()` solicita o capítulo completo e mostra o resultado em uma janela modal. `fetchChapterFromApi()` tenta primeiro a ABíbliaDigital (NVI) e depois a bible-api.com (Almeida).
+- **Leitura do capítulo:** `openChapterModal()` solicita o capítulo completo e mostra o resultado em uma janela modal. `fetchChapterFromApi()` tenta primeiro a ABíbliaDigital (NVI) e depois usa a Bible API com Almeida como alternativa.
 
 ## 🎨 Personalização
 
-- **Perguntas, dicas, referências e pontuação:** edite `script.js`.
-- **Cores, espaçamentos e aparência:** ajuste as variáveis no início de `style.css`, como `--bg-color`, `--gold` e `--card-bg`.
+- **Perguntas, dicas, referências, tutorial e pontuação:** edite `script.js`.
+- **Cores, espaçamentos e aparência dos modais:** ajuste as variáveis e os estilos em `style.css`, como `--bg-color`, `--gold` e `--card-bg`.
 - **Texto e elementos da página:** altere a estrutura em `index.html`.
 
 ---
