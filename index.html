@@ -22,7 +22,10 @@
     <div class="game-container">
         <header>
             <h1>📜 Códice Bíblico</h1>
-            <div class="score-board">Pontos: <span id="score">0</span></div>
+            <div class="header-actions">
+                <button type="button" class="tutorial-button" onclick="openTutorial()">❓ Como jogar</button>
+                <div class="score-board">Pontos: <span id="score">0</span></div>
+            </div>
         </header>
 
         <div class="difficulty-bar" aria-label="Nível de dificuldade">
@@ -71,6 +74,35 @@
             </div>
             <div id="chapter-modal-body" class="chapter-modal-body">
                 Carregando capítulo...
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial explicativo -->
+    <div id="tutorial-modal" class="tutorial-modal" role="dialog" aria-modal="true"
+        aria-labelledby="tutorial-title">
+        <div class="tutorial-modal-box">
+            <div class="tutorial-modal-header">
+                <div>
+                    <span class="tutorial-eyebrow">Tutorial completo</span>
+                    <h2 id="tutorial-title">Como jogar</h2>
+                </div>
+                <button type="button" class="tutorial-close-btn" onclick="closeTutorial()"
+                    aria-label="Fechar tutorial">✕</button>
+            </div>
+
+            <div class="tutorial-progress" aria-label="Progresso do tutorial">
+                <div id="tutorial-progress-bar" class="tutorial-progress-bar"></div>
+            </div>
+
+            <div id="tutorial-content" class="tutorial-content" aria-live="polite" tabindex="-1"></div>
+
+            <div class="tutorial-footer">
+                <button type="button" id="tutorial-prev" class="tutorial-prev"
+                    onclick="previousTutorialStep()">← Voltar</button>
+                <span id="tutorial-step-count" class="tutorial-step-count"></span>
+                <button type="button" id="tutorial-next" class="tutorial-next"
+                    onclick="nextTutorialStep()">Próximo →</button>
             </div>
         </div>
     </div>

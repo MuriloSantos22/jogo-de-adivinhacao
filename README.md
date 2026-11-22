@@ -35,6 +35,8 @@ O jogo não precisa de servidor para as perguntas e respostas, mas servir a pág
 
 ## 🎮 Como jogar
 
+Ao abrir o jogo pela primeira vez, um tutorial completo é exibido em várias etapas: objetivo, níveis de dificuldade, leitura da história, uso da dica, preenchimento da referência, pontuação e continuação do jogo. O tutorial pode ser aberto novamente a qualquer momento pelo botão **❓ Como jogar** no cabeçalho.
+
 1. Escolha **Fácil**, **Médio** ou **Difícil**.
 2. Leia a descrição da passagem.
 3. Se quiser, peça uma dica. A dica custa 15 pontos e só pode ser usada uma vez por pergunta.

@@ -340,6 +340,67 @@ const nextBtn = document.getElementById('next-button');
 const chapterModal = document.getElementById('chapter-modal');
 const chapterModalTitle = document.getElementById('chapter-modal-title');
 const chapterModalBody = document.getElementById('chapter-modal-body');
+const tutorialModal = document.getElementById('tutorial-modal');
+const tutorialContent = document.getElementById('tutorial-content');
+const tutorialTitle = document.getElementById('tutorial-title');
+const tutorialPrev = document.getElementById('tutorial-prev');
+const tutorialNext = document.getElementById('tutorial-next');
+const tutorialStepCount = document.getElementById('tutorial-step-count');
+const tutorialProgressBar = document.getElementById('tutorial-progress-bar');
+
+const tutorialSteps = [
+    {
+        title: "Objetivo do jogo",
+        icon: "📜",
+        text: "O jogo apresenta um resumo de uma história ou de uma passagem da Bíblia.",
+        extra: "Sua tarefa é descobrir de onde esse trecho veio: qual é o <strong>livro</strong>, o <strong>capítulo</strong> e o <strong>versículo</strong>.",
+        example: "Exemplo de resposta: <strong>Gênesis 1:2</strong>"
+    },
+    {
+        title: "Escolha o nível",
+        icon: "🎚️",
+        text: "Antes de começar, escolha <strong>Fácil</strong>, <strong>Médio</strong> ou <strong>Difícil</strong> na parte superior.",
+        extra: "Fácil usa histórias conhecidas. Médio usa parábolas e profetas. Difícil usa referências mais específicas, leis e genealogias.",
+        example: "O nível dificulta o desafio e também aumenta a pontuação."
+    },
+    {
+        title: "Leia a história",
+        icon: "👀",
+        text: "Leia com atenção o texto dentro da caixa dourada.",
+        extra: "Procure por nomes de pessoas, lugares, acontecimentos e detalhes que podem indicar o livro e o capítulo.",
+        example: "Toda resposta é formada por três informações: Livro, capítulo e versículo."
+    },
+    {
+        title: "Use uma dica, se precisar",
+        icon: "💡",
+        text: "O botão <strong>Dica</strong> revela uma pista sobre o trecho.",
+        extra: "A dica pode citar o Antigo ou Novo Testamento, o nome do autor ou uma informação sobre o episódio.",
+        example: "Cada dica custa 15 pontos e só pode ser usada uma vez em cada história."
+    },
+    {
+        title: "Preencha a referência",
+        icon: "✍️",
+        text: "Selecione o <strong>livro</strong>. Depois, escolha o <strong>capítulo</strong> e digite o número do <strong>versículo</strong>.",
+        extra: "Os capítulos dependem do livro escolhido. Por exemplo, o capítulo de Gênesis pode ir até 50.",
+        example: "Exemplo: Livro <strong>Mateus</strong> • Capítulo <strong>8</strong> • Versículo <strong>24</strong>"
+    },
+    {
+        title: "Confira sua resposta",
+        icon: "✅",
+        text: "Clique em <strong>Responder</strong>. O jogo mostrará a referência correta e quantos pontos você ganhou.",
+        extra: "Resposta exata: 250 pontos-base. Livro e capítulo: 100. Apenas o livro: 50. Resposta diferente: nenhum ponto.",
+        example: "Fácil ×1 • Médio ×1,5 • Difícil ×2."
+    },
+    {
+        title: "Continue aprendendo",
+        icon: "📖",
+        text: "Depois de responder, use <strong>Ler capítulo completo</strong> para conferir o contexto da passagem.",
+        extra: "Quando terminar de ler, clique em <strong>Próxima história</strong>. Os controles ficarão disponíveis novamente.",
+        example: "Se esqueceu algum passo, o botão “Como jogar” pode abrir este tutorial novamente."
+    }
+];
+
+let tutorialStep = 0;
 
 function populateBookSelect() {
     const atGroup = document.createElement('optgroup');
@@ -570,12 +631,75 @@ function updateScore() {
     document.getElementById('score').innerText = score;
 }
 
+function renderTutorialStep() {
+    const step = tutorialSteps[tutorialStep];
+    tutorialTitle.textContent = "Como jogar";
+    tutorialContent.innerHTML = `
+        <div class="tutorial-step-icon" aria-hidden="true">${step.icon}</div>
+        <h3>${step.title}</h3>
+        <p>${step.text}</p>
+        <p>${step.extra}</p>
+        <div class="tutorial-example">${step.example}</div>
+    `;
+    tutorialStepCount.textContent = `Passo ${tutorialStep + 1} de ${tutorialSteps.length}`;
+    tutorialProgressBar.style.width = `${((tutorialStep + 1) / tutorialSteps.length) * 100}%`;
+    tutorialPrev.disabled = tutorialStep === 0;
+    tutorialNext.textContent = tutorialStep === tutorialSteps.length - 1 ? "Começar a jogar ✓" : "Próximo →";
+    tutorialContent.focus({ preventScroll: true });
+}
+
+function openTutorial() {
+    tutorialStep = 0;
+    renderTutorialStep();
+    tutorialModal.classList.add('open');
+    tutorialNext.focus();
+}
+
+function closeTutorial(markAsSeen = true) {
+    tutorialModal.classList.remove('open');
+    if (markAsSeen) {
+        try {
+            localStorage.setItem('tutorialSeen', 'true');
+        } catch (_) {
+            // O tutorial continua funcionando mesmo sem armazenamento local.
+        }
+    }
+}
+
+function previousTutorialStep() {
+    if (tutorialStep > 0) {
+        tutorialStep -= 1;
+        renderTutorialStep();
+    }
+}
+
+function nextTutorialStep() {
+    if (tutorialStep < tutorialSteps.length - 1) {
+        tutorialStep += 1;
+        renderTutorialStep();
+        return;
+    }
+    closeTutorial();
+}
+
+tutorialModal.addEventListener('click', (event) => {
+    if (event.target === tutorialModal) {
+        closeTutorial();
+    }
+});
+
 bookSelect.addEventListener('change', updateChapterSelect);
 
 chapterModal.addEventListener('click', (event) => {
     if (event.target === chapterModal) {
         closeChapterModal();
     }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (tutorialModal.classList.contains('open')) closeTutorial();
+    else if (chapterModal.classList.contains('open')) closeChapterModal();
 });
 
 document.querySelectorAll('.diff-btn').forEach((btn) => {
@@ -591,3 +715,11 @@ document.querySelectorAll('.diff-btn').forEach((btn) => {
 populateBookSelect();
 preparePassages();
 loadQuestion();
+
+try {
+    if (localStorage.getItem('tutorialSeen') !== 'true') {
+        openTutorial();
+    }
+} catch (_) {
+    openTutorial();
+}
