@@ -14,6 +14,8 @@ Na primeira visita, um tutorial em várias etapas explica a mecânica do jogo. D
 
 O projeto usa somente HTML, CSS e JavaScript — não requer instalação de pacotes nem processo de compilação.
 
+Para informações acadêmicas e técnicas detalhadas, consulte a [documentação completa](./DOCUMENTACAO.md).
+
 ## 🗂️ Arquivos
 
 | Arquivo | Responsabilidade |
@@ -21,6 +23,7 @@ O projeto usa somente HTML, CSS e JavaScript — não requer instalação de pac
 | [`index.html`](./index.html) | Estrutura da página, controles do jogo, seletor de dificuldade, tutorial e janela de leitura do capítulo. Também define o título da aba e o ícone. |
 | [`style.css`](./style.css) | Aparência, cores, disposição dos elementos, estados dos botões e estilos dos modais de tutorial e leitura. |
 | [`script.js`](./script.js) | Banco de passagens, seleção aleatória, tutorial, pontuação, validação das respostas e consulta às APIs bíblicas. |
+| [`DOCUMENTACAO.md`](./DOCUMENTACAO.md) | Documentação acadêmica e técnica completa do projeto. |
 
 ## 🚀 Como executar
 
@@ -98,7 +101,7 @@ Os pontos-base são multiplicados pela dificuldade:
 - **Médio:** ×1,5;
 - **Difícil:** ×2.
 
-Exemplo: uma resposta exata no modo Difícil vale 500 pontos-base multiplicados pela dificuldade, ou seja, 500 pontos.
+Exemplo: uma resposta exata no modo Difícil vale 250 × 2, ou seja, 500 pontos.
 
 Após responder, os campos de livro, capítulo e versículo e os dois botões de ação são desativados para evitar alterações ou pontuação repetida na mesma pergunta.
 
@@ -140,6 +143,10 @@ Há **30 passagens**, distribuídas igualmente: 10 por dificuldade. Para acresce
 - **Perguntas, dicas, referências, tutorial e pontuação:** edite `script.js`.
 - **Cores, espaçamentos e aparência dos modais:** ajuste as variáveis e os estilos em `style.css`, como `--bg-color`, `--gold` e `--card-bg`.
 - **Texto e elementos da página:** altere a estrutura em `index.html`.
+
+## 📖 Documentação acadêmica
+
+Para uma descrição completa da proposta, requisitos, arquitetura, regras de negócio, testes, limitações e possibilidades de evolução, consulte [`DOCUMENTACAO.md`](./DOCUMENTACAO.md).
 
 ---
 
